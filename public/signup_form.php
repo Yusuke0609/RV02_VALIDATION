@@ -60,7 +60,9 @@
           >
           <p class="error" style="color:red"><?php echo $errors['password']?></p>
         </div>  
+        <div class="button_position">
           <button type="submit">登録</button>
+        </div>
       </form>
     </div>
 </body>
