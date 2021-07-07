@@ -54,7 +54,7 @@
             type="password"
             name="password_conf" 
             id="exampleInputPassword" 
-            placeholder="確認用パスワードを入力ださい"
+            placeholder="確認用パスワードを入力してださい"
             class="<?php echo !empty($errors['password'])? 'error': 'ok'?>" 
             value="<?php echo $data['password'] ?>"
           >
