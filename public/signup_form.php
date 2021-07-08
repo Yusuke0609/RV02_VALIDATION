@@ -1,3 +1,12 @@
+<?php
+
+$data = [];
+$data['user_name'] = !empty($_POST['user_name'])? $_POST['user_name'] : '';
+$data['email'] = !empty($_POST['email'])? $_POST['email'] : '';
+$data['password'] = !empty($_POST['password'])? $_POST['password'] : '';
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -11,12 +20,12 @@
 <body>
   <h1>ユーザー登録</h1>
     <div class="bg-example">
-      <form action="register.php" method="POST">
+      <form action="signup_form.php" method="POST">
         <div class="form-group">
           <label for="username">名前</label>
           <input 
             type="text"
-            name="username"
+            name="user_name"
             id="exampleInputName"
             placeholder="名前"
             class="<?php echo !empty($errors['user_name'])? 'error': 'ok'?>" 
