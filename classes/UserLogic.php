@@ -22,7 +22,7 @@ Class UserLogic
         //プレースホルダー
         //?,?,?には配列で値を入れる
         //UserDataを受け取って配列に入れる
-        $sql = 'INSERT INTO users (name, email, 
+        $sql = 'INSERT INTO rv02_user (name, email, 
         password) VALUE(?, ?, ?)';
 
         //UserDataを配列に入れる
@@ -44,8 +44,8 @@ Class UserLogic
             return $result;
         } catch(\Exception $e) {
             //例外が発生した場合、falseを返す->最初にfalseを定義する
-            return $result;
 
+            return $result;
         }
     }
 }
