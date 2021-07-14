@@ -61,6 +61,7 @@ $data = [];
 $data['user_name'] = !empty($_POST['user_name'])? $_POST['user_name'] : '';
 $data['email'] = !empty($_POST['email'])? $_POST['email'] : '';
 $data['password'] = !empty($_POST['password'])? $_POST['password'] : '';
+$data['password_conf'] = !empty($_POST['password_conf'])? $_POST['password_conf'] : '';
 
 //POSTリクエストの場合はバリデーションを実行する
 //$_POSTが空ではない、かつ、$_POST['user_name']が空の場合=user_nameのフォームに何も入力せずに送信した場合、errors配列に'user_name'を代入する
@@ -75,7 +76,7 @@ if (!empty($_POST)) {
     $errors['password'] = 'パスワードを入力してください。';
   }
   if (empty($_POST['password_conf'])) {
-    $errors['password_conf'] = 'パスワードを入力してください。';
+    $errors['password_conf'] = '確認用パスワードを入力してください。';
   }
     //もしエラーでなければ
   if (empty($errors)) {
@@ -90,7 +91,7 @@ if (!empty($_POST)) {
     $stmt->bindParam(2, $data['email'], PDO::PARAM_STR);
     //ハッシュは文字列を解読しづらくする難読化
     $stmt->bindParam(3, password_hash($data['password'], PASSWORD_DEFAULT), PDO::PARAM_STR);
-    $stmt->bindParam(4, password_hash($data['password'], PASSWORD_DEFAULT), PDO::PARAM_STR);
+    $stmt->bindParam(4, password_hash($data['password_conf'], PASSWORD_DEFAULT), PDO::PARAM_STR);
     $stmt->execute();
     $result = true;
   }
@@ -116,7 +117,7 @@ if (!empty($_POST)) {
   <?php else: ?>
 
     <div class="bg-example">
-      <form action="completed.php" method="POST">
+      <form action="confirmed.php" method="POST">
         <div class="form-group">
           <label for="exampleInputName">名前</label>
 <!-- 125行目：$errorsのuser_nameが空でなければ errorが表示されます。 -->
@@ -168,7 +169,7 @@ if (!empty($_POST)) {
             class="<?php echo !empty($errors['$password_conf'])? 'error': 'ok'?>" 
             value="<?php echo $data['$password_conf'] ?>"
           >
-          <p class="error" style="color:red"><?php echo $errors['password']?></p>
+          <p class="error" style="color:red"><?php echo $errors['$password_conf']?></p>
         </div>
         <div class="button_position">
             <button type="submit">登録</button>
