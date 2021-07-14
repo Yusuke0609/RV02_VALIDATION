@@ -16,7 +16,7 @@ ini_set('display_errors', "On");
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 // 文字化け対策
-$options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8mb4_unicode_ci'");
+$options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET CHARACTER SET 'utf8'");
 
 // PHPのエラーを表示するように設定
 error_reporting(E_ALL & ~E_NOTICE);
@@ -32,7 +32,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 //$dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 
 try {
-    $dbh = new PDO('mysql:host='.localhost.';port='.3306.';dbname='.workshop, Yamauchi, yusuke0609, $options);
+    $dbh = new PDO('mysql:host=localhost;port=3306;dbname=workshop', 'Yamauchi', 'yusuke0609', $options);
     //エラーのモードを決める
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //例外の場合の処理 "$e"
