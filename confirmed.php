@@ -1,5 +1,5 @@
 <?php
-$register = $_POST;
+
 
 //検証結果がエラーであれば、エラーをエラー配列に入れる
 $errors = [];
@@ -11,6 +11,7 @@ $errors = [];
 if(!$data['user_name'] = filter_input(INPUT_POST, 'user_name')){
     $errors[] = "ユーザー名を記入してください";
 }
+// 文字列のフィルタリング
 if(!$data['email'] = filter_input(INPUT_POST, 'email')){
     $errors[] = "メールアドレスを記入してください";
 }
@@ -19,10 +20,6 @@ $data['password'] = filter_input(INPUT_POST, 'password');
 //preg_matchはdefultはtrueなので!Falseで設定する
 if (!preg_match("/\A[a-z\d]{8,100}+\z/i",$password)) {
     $errors[] = "パスワードは英数字8文字以上100文字以下にしてください";
-}
-$password_conf = filter_input(INPUT_POST, 'password_conf');
-if ($password !== $password_conf) {
-    $errors[] = "確認用パスワードが間違っています";
 }
 
 //上記の入力でエラーが0であれば
@@ -60,7 +57,7 @@ if (count($$errors) === 0) {
     <p class="success">ユーザー登録が完了しました。</p>
 <?php endif ?>
 <!-- どちらでも戻るボタンは表示 -->
-    <p class="success"><a href=".ref.code.php">戻る</a></p>
+    <p class="success"><a href="ref.code.php">戻る</a></p>
 
 </body>
 </html>
