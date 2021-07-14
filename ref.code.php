@@ -74,6 +74,9 @@ if (!empty($_POST)) {
   if (empty($_POST['password'])) {
     $errors['password'] = 'パスワードを入力してください。';
   }
+  if (empty($_POST['password_conf'])) {
+    $errors['password_conf'] = 'パスワードを入力してください。';
+  }
     //もしエラーでなければ
   if (empty($errors)) {
 
@@ -81,12 +84,13 @@ if (!empty($_POST)) {
     //?,?,?には配列で値を入れる
     //UserDataを受け取って配列に入れる
     //INSERT 文: INSERT INTO tbl_name (col_name1, col_name2, ...) VALUES (value1, value2, ...)
-    $stmt = $dbh->prepare ('INSERT INTO rv02_user (user_name, email, password) VALUE(?, ?, ?)');
+    $stmt = $dbh->prepare ('INSERT INTO rv02_user (user_name, email, password, password_conf) VALUE(?, ?, ?, ?)');
     //PDO::PARAM_STR は"文字列"という意味
     $stmt->bindParam(1, $data['user_name'], PDO::PARAM_STR);
     $stmt->bindParam(2, $data['email'], PDO::PARAM_STR);
     //ハッシュは文字列を解読しづらくする難読化
     $stmt->bindParam(3, password_hash($data['password'], PASSWORD_DEFAULT), PDO::PARAM_STR);
+    $stmt->bindParam(4, password_hash($data['password'], PASSWORD_DEFAULT), PDO::PARAM_STR);
     $stmt->execute();
     $result = true;
   }
@@ -112,7 +116,7 @@ if (!empty($_POST)) {
   <?php else: ?>
 
     <div class="bg-example">
-      <form action="./index.php" method="post">
+      <form action="completed.php" method="POST">
         <div class="form-group">
           <label for="exampleInputName">名前</label>
 <!-- 125行目：$errorsのuser_nameが空でなければ errorが表示されます。 -->
@@ -161,8 +165,8 @@ if (!empty($_POST)) {
             name="password_conf" 
             id="exampleInputPassword" 
             placeholder="確認用パスワードを入力してださい"
-            class="<?php echo !empty($errors['password'])? 'error': 'ok'?>" 
-            value="<?php echo $data['password'] ?>"
+            class="<?php echo !empty($errors['$password_conf'])? 'error': 'ok'?>" 
+            value="<?php echo $data['$password_conf'] ?>"
           >
           <p class="error" style="color:red"><?php echo $errors['password']?></p>
         </div>
